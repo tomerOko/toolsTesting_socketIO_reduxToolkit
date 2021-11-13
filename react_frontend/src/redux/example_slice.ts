@@ -9,7 +9,7 @@ export interface IExampleStoreState {
     /**
      * comment about age
      */
-    age : 
+    age : number 
 }
 
 const initialState : IExampleStoreState = {
@@ -25,10 +25,10 @@ const ExampleSlice = createSlice({
         setName: (state:IExampleStoreState, action : PayloadAction<string>) =>{
             state.name = action.payload
         },
-        setAge : (state : IExampleStoreState, action : PayloadAction<number[]>) =>{
+        setAge : (state : IExampleStoreState, action : PayloadAction<number>) =>{
             state.age = action.payload
         },        
-        increaseAge : (state : IExampleStoreState, action : PayloadAction<number[]>) =>{
+        increaseAge : (state : IExampleStoreState, action : PayloadAction<number>) =>{
             state.age = state.age + action.payload
         },
     }

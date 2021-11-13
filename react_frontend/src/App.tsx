@@ -1,19 +1,15 @@
 import './App.css';
 // import AllTests from './components/tests/AllTests';
 import { CSSProperties } from 'react';
-import ListContainer from './components/resultsList/listContainer/listContainer';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
-import FormComponent from './components/queryForm/queryFormComponent';
 
 function App() {
   return (
     <Router>
       <div className = "blueishBackground" style={outerContainerStyle}>
         <div className="container blueishBackground" style={innerContainerStyle}>
-          <Routes>
-            <Route path="/search_result" element={<ListContainer/>} />
-            <Route path="" element={<FormComponent />} />
-          </Routes>
+          <p>hey</p>
+         
         </div>
       </div>
     </Router>
@@ -45,3 +41,9 @@ const outerContainerStyle:CSSProperties = Object.assign(
 )
 
 export default App;
+
+
+// <Routes>
+// <Route path="/search_result" element={</*some element here*//>} />
+// <Route path="" element={</*some element here*/ />} />
+// </Routes>

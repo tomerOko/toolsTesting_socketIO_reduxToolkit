@@ -1,6 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit'
 import {useSelector, useDispatch, TypedUseSelectorHook} from 'react-redux'
-import {ExampleSlice} from './searchResultsSlice'
+import {ExampleSlice} from './example_slice'
 const store = configureStore(
     {
         reducer:{

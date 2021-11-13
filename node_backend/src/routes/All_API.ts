@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { dealSearchRoutes } from "./deal_search_routes";
+import { searchVicationPackageRouter } from "./search_vication_package.router";
 
 const rootRouter = Router()
 
-rootRouter.use('/deal_search', dealSearchRoutes)
+rootRouter.use('/search_vication_package', searchVicationPackageRouter)
 export {rootRouter}

@@ -1,5 +1,15 @@
 import { Schema, model} from "mongoose";
-import User from "../interfaces/User";
+
+interface IUser{
+  Id: String,
+  displayName: String,
+  firstName: String,
+  lastName: String,
+  image: String,
+  email: String,
+  createdAt: Date,
+}
+
 /**
  * this file is based on the assunption that
  * the server/app already did mongoose.connect{...}
@@ -8,7 +18,7 @@ import User from "../interfaces/User";
  * later on here and in any other schemas
  */
 //צריך אחרי הפיתוח להחביא את השמות האמיתיים של המתשנים בדאתא בייס
-const schema = new Schema<User>(
+const schema = new Schema<IUser>(
   {
     Id: {
       type: String,
@@ -40,7 +50,7 @@ const schema = new Schema<User>(
   }
 )
 
-const UserModel = model<User>('US',schema)
+const UserModel = model<IUser>('Users',schema) // the string is the name of the collection that this model will create and use in the db
 
 const me = new UserModel({
   id:'exampleString',

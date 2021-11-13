@@ -1,15 +1,7 @@
-import session, { SessionOptions } from 'express-session'
-import { IAccommodationInSessionStorage } from '../interfaces/SearchResult';
-import { IsearchQuery } from '../interfaces/seqrchQuery';
+import session, { CookieOptions, SessionOptions } from 'express-session'
 
 declare module 'express-session' { // a code i copy, it lets u declare type to req.session
-  export interface SessionData {
-    results : IAccommodationInSessionStorage [],
-    //** in case new search was fire from the client, and some of the old result still arriving */
-    searchId: string,
-    numberOfQueries : number,
-    isDone:boolean
-  }
+  export interface SessionData { }//** place to define the session storage data type */  
 }
 
 //@Desc a db communication mechanism thats saves the session storage of requests in order to make it persistant
@@ -24,18 +16,18 @@ const store = new connectMongoDBSession({
 });
 
 //@Desc error loging
-store.on('error', function(error) {
-  console.log(error);
-});
+store.on('error', (error) => {console.log(error)});
+
+const cookieOptions : CookieOptions = {
+  maxAge: 1000 * 60 * 60 * 3,
+  httpOnly: true, 
+  sameSite: 'lax' // sinse mid 2020 browser began blocking third party cookie even if allowed by destenaion server, so it is better be seen here
+  // secure: false
+}
 
 const sessionConfigs : SessionOptions= {
     secret: process.env.SESSION_PASSWORD as string,
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 3,
-      httpOnly: true, 
-      sameSite: 'lax' // sinse mid 2020 browser began blocking third party cookie even if allowed by destenaion server, so it is better be seen here
-      // secure: false
-    },
+    cookie: cookieOptions,
     proxy:true,
     store: store,
     resave: false,
