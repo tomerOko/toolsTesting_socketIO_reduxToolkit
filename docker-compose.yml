@@ -1,0 +1,77 @@
+version: "3.9"
+services:
+
+  react_frontend:
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    image: react_one:latest
+    build: ./react_frontend
+    container_name: react_frontend.container
+    entrypoint: sh start_react.sh
+    hostname: 0.0.0.0
+    environment: 
+      - PORT=4200
+    ports: 
+      - "4200:4200"
+      - "4205:4205" # documentations
+    volumes: 
+      - ./react_frontend/:/app
+  
+  node_backend:
+      stdin_open: true # docker run -i
+      tty: true        # docker run -t
+      image: node_backend:latest
+      build: ./node_backend
+      container_name: node_backend.container
+      entrypoint: sh start_node.sh
+      hostname: 0.0.0.0
+      ports: 
+        - "3000:3000"
+      volumes: 
+        - ./node_backend/:/app
+      depends_on: 
+        - mongo
+  
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - './mongodb:/data/db'
+    ports:
+      - 27017:27017
+    expose: 
+      - 27017
+
+  nginx:    # service name will also be the dns of the service inside docker networks
+    stdin_open: true  #docker run -i
+    tty: true         #docker run -t
+    image: nginx_ubuntu  #if 'image' is specified alog with 'build' it will use the value just for taging, but will build according to the build file
+    build: ./nginx/environment #location of the 'Dockerfile' (have to be spelt excaly this way)
+    container_name: nginx_server.container # used for docker cont
+    hostname: 0.0.0.0 # what is it??
+    ports: # in case of wsl, it and windows share the same port connection, but there is still a need to connect a container port to the wsl port. in regular linux it is the same just without the windows part..
+      - "80:80" #8090 on host 80 on container
+    volumes: # being load after build phase but before entrypoint script/command
+      - ./nginx/config/:/etc/nginx  # the configuration of the server have to be in a specific addres in the linux file system
+      - ./nginx/assets/:/var/nginx_assests  # in case of serving local assets from the nginx container insted of the one of the apps container, the config directory is banned for serving, so we need another location, i think it have to be specificaly inside the 'var' directory
+      - ./nginx/environment/:/app   # it did more sence to me to seperate to entrypoint script and docker-file and from the nginx config / assets
+      - ./nginx/logs/:/var/log/nginx  # in order to see the files nginx logging to. meaning see them here insted of cli into the container
+    entrypoint: sh /app/start.sh
+    environment: 
+      TEST : "invironment variables are avialble inside the container's shell"
+
+
+      
+
+
+networks: 
+  weski:
+    driver: bridge
+
+
+
+
+# sudo chown -R $USER:$(id -gn $USER) ./*

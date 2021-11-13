@@ -1,0 +1,86 @@
+
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	# root /var/nginx_assests/html;
+	# Add index.php to the list if you are using PHP
+	# index site1.html index.htm index.nginx-debian.html;
+	server_name _;
+	location / {
+		proxy_pass node_backend
+		# try_files $uri /site1.html;
+		# # ↑ sets the default file to serve in case to specifit route specified in the url dosent exist
+		# # try_files $uri $uri/ =404;
+	}
+}
+
+
+# server {
+#         listen   80;
+#         server_name domain.somehost.com;
+
+#         location / {
+			
+# 				# kill cache
+# 				add_header Last-Modified $date_gmt;
+# 				add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+# 				if_modified_since off;
+# 				expires off;
+# 				etag off;
+
+# 				# reverse proxy to server
+#                 proxy_set_header X-Real-IP $remote_addr;
+#                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#                 proxy_set_header Host $host;
+#                 proxy_set_header X-NginX-Proxy true;
+#                 proxy_pass http://localhost:3000/;
+#                 proxy_redirect http://localhost:3000/ https://$server_name/;
+#         }
+# }
+
+# server {
+#   # Setup the domain name(s)
+#   server_name _;
+#   listen 80 default_server;
+
+#   # If you would like to gzip your stuff
+#   gzip on;
+#   gzip_min_length 1;
+#   gzip_types *;
+
+#   # Setup the proxy
+#   # This will forward all requests to the server
+#   # and then it will relay the servers response back to the client
+#   location / {
+#     proxy_pass http://localhost:3000;
+#     proxy_http_version 1.1;
+#     proxy_set_header Upgrade $http_upgrade;
+#     proxy_set_header Connection 'upgrade';
+#     proxy_set_header Host $host;
+#     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#     proxy_cache_bypass $http_upgrade;
+#   }
+# }
+
+
+
+# server {
+# 	# 	listen 80 default_server;
+# 	# 	listen [::]:80 default_server;
+# 	listen 80;  
+#     # ↑ port to listen on
+# 	server_name localhost:8090;
+#     # ↑  many sites can be hosted on one server and on one port, that what 'virtual hosting' is
+
+# # 	root /var/nginx_assests/html;
+# # 	# Add index.php to the list if you are using PHP
+# # 	index index.html index.htm index.nginx-debian.html;
+# # 	server_name _;
+# 	location / {
+# 		root ./html;
+# 		index test.html;
+# 		try_files $uri /site1.html;
+# 		# ↑ sets the default file to serve in case to specifit route specified in the url dosent exist
+# 	}
+# }
+

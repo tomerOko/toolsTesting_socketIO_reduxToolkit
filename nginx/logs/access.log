@@ -1,0 +1,3 @@
+172.18.0.1 - - [13/Nov/2021:14:33:33 +0000] "GET /api/deal_search/resetSession HTTP/1.1" 404 23 "-" "PostmanRuntime/7.28.3"
+172.18.0.1 - - [13/Nov/2021:14:33:42 +0000] "POST /api/deal_search/search HTTP/1.1" 200 5 "-" "PostmanRuntime/7.28.3"
+172.18.0.1 - - [13/Nov/2021:14:33:48 +0000] "GET /api/deal_search/resetSession HTTP/1.1" 404 23 "-" "PostmanRuntime/7.28.3"

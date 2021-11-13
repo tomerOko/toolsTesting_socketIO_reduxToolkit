@@ -1,0 +1,4 @@
+PORT = 3000  // port to sereve on, make sure u are on the same one as the docker compose is exposing
+MONGO_URI = mongodb://root:example@mongo:27017 // becouse all the networking is runing inside docker-network, the domain name here is the service name
+MONGO_SESSIONS_COLLECTION_NAME = skiSessions // name of the collection in the DB to contain the session data
+SESSION_PASSWORD = WeSki // a password to increapt the session cookies with
