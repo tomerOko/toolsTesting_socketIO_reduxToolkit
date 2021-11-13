@@ -1,32 +1,35 @@
- import WebSockett from 'ws'
- const socketServer = new WebSockett.Server({port: 3001})
- import axios, { AxiosResponse } from "axios";
-import { IResposeBody } from './types/interfaces/search_vication_package.types';
-
+import WebSockett from 'ws'
+const socketServer = new WebSockett.Server({port: 3001})
+import axios, { AxiosResponse } from "axios";
+import { IResposeBody, IRequestBody, IQuery, ISearchEngine } from './types/interfaces/search_vication_package.types';
+import {searchEngines} from './config/searchEngines'
  
- socketServer.on('connection' , socket => {
-   socket.on('message', message =>{
-    axios.post<IResposeBody>("https://gya7b1xubh.execute-api.eu-west-2.amazonaws.com/default/HotelsSimulator", queryAsSring )
-    .then((response: AxiosResponse) => {
-        console.log((response.data  as IResposeBody).body.accommodations)
-        socket.send(JSON.stringify((response.data  as IResposeBody).body.accommodations))
-    }); 
-   })
+socketServer.on('connection' , socket => {
+   
+    socket.on('message', message =>{
+        
+        const requestBody :IRequestBody = JSON.parse(message.toString())
+        const query = requestBody.query
+        searchEngines.forEach(searchEngine => { // imitates multiple search engines
+            for (let additinalGuest = 0; additinalGuest<3; additinalGuest++){
+                setTimeout(() => {
+                    makeSingleRequestToEngine(query, additinalGuest, searchEngine, socket)
+                }, Math.random() * 5 * 1000); // imitates diffrent response times
+            }
+        }) 
+    })
  })
 
 
-
-const query ={
-    query: { 
-    ski_site: 1, 
-    from_date: "03/04/2022", 
-    to_date: "03/11/2022", 
-    group_size: 4 
-    } 
-}
-
-const queryAsSring = JSON.stringify(query)
-
+ const makeSingleRequestToEngine = (query : IQuery, additinalGuest: number, searchEngine : ISearchEngine, socket: WebSockett) => {
+    query.group_size+=additinalGuest
+    const newRequestBody : string = JSON.stringify({query:query})
+    axios.post<IResposeBody>(searchEngine.engineUrl, newRequestBody )
+    .then((response: AxiosResponse) => {
+        console.log(response.data)
+        socket.send(JSON.stringify((response.data  as IResposeBody).body.accommodations))
+    });
+ }
 
 
  const mockResults = (socket: WebSocket, message:WebSockett.RawData) => {
@@ -38,8 +41,3 @@ const queryAsSring = JSON.stringify(query)
      socket.send('hey')
     },2000)
  }
-
-//  const dataToPush :IAccommodationInSessionStorage[] = [];
-//  (response.data as ISearchResult).body.accommodations.map(x => {
-//      dataToPush.push(Object.assign({engineId:searchEngine.engineId}, x))
-//  })

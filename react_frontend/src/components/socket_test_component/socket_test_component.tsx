@@ -42,7 +42,16 @@ const SocketTestComponent = (props:any) => {
     }
 
     const connectToSocket = () => {
-        socket.send('hallow')
+        const query ={
+                query: { 
+                ski_site: 1, 
+                from_date: "03/04/2022", 
+                to_date: "03/11/2022", 
+                group_size: 4 
+                } 
+            }
+        const queryAsSring = JSON.stringify(query)
+        socket.send(queryAsSring)
     }
     
     //the final tsx component here

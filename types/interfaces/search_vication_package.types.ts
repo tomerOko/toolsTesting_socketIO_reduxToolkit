@@ -47,6 +47,8 @@ export interface IResposeBody {
     body: IBody;
 }
 
+
+// request interfaces
 export interface IRequestBody{
     query:IQuery
 }
@@ -57,4 +59,11 @@ export interface IQuery{
     to_date: string, 
     group_size: number 
 }
+
+//search engines interfaces // in reality each search engine will probably have its own interfaces and function to create a solid response type to client side
+export interface ISearchEngine{
+    engineId:string,
+    engineUrl:string
+}         
+
 
