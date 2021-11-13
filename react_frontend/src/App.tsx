@@ -3,14 +3,15 @@ import './App.css';
 import { CSSProperties } from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import SocketTestComponent from './components/socket_test_component/socket_test_component';
+import { MaterialFormComponent } from './components/material_form_component/material_form_component';
 
 function App() {
   return (
     <Router>
       <div className = "blueishBackground" style={outerContainerStyle}>
         <div className="container blueishBackground" style={innerContainerStyle}>
-          <p>hey</p>
-          <SocketTestComponent/>
+          {/* <SocketTestComponent/> */}
+          <MaterialFormComponent/>
         </div>
       </div>
     </Router>
