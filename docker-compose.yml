@@ -16,6 +16,7 @@ services:
       - "4205:4205" # documentations
     volumes: 
       - ./react_frontend/:/app
+      - ./types/:/app/src/types  # a common typescript interfaces and json schemas directory. in order to keep it eaqual and see errors as static type checking
   
   node_backend:
       stdin_open: true # docker run -i
@@ -27,8 +28,10 @@ services:
       hostname: 0.0.0.0
       ports: 
         - "3000:3000"
+        - "3001:3001"
       volumes: 
         - ./node_backend/:/app
+        - ./types/:/app/src/types  # a common typescript interfaces and json schemas directory. in order to keep it eaqual and see errors as static type checking
       depends_on: 
         - mongo
   

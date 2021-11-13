@@ -2,6 +2,7 @@ import './App.css';
 // import AllTests from './components/tests/AllTests';
 import { CSSProperties } from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import SocketTestComponent from './components/socket_test_component/socket_test_component';
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       <div className = "blueishBackground" style={outerContainerStyle}>
         <div className="container blueishBackground" style={innerContainerStyle}>
           <p>hey</p>
-         
+          <SocketTestComponent/>
         </div>
       </div>
     </Router>

@@ -74,9 +74,20 @@ const httpServer = http.createServer(app);
 httpServer.listen(process.env.PORT, () => logging.info(NAMESPACE, `Server is running on default host :${process.env.PORT}`));
 
 
+ import WebSockett from 'ws'
+ const socketServer = new WebSockett.Server({port: 3001})
 
-
-
+ socketServer.on('connection' , socket => {
+   socket.on('message', message =>{
+     let i=0
+     const interval = setInterval(()=>{
+       i++
+      if(i>5) clearInterval(interval)
+      console.log(message.toString())
+      socket.send('hey')
+     },2000)
+   })
+ })
 
 
 
