@@ -8,7 +8,7 @@ import {connectNow} from  './config/monogoSercive'
 import { rootRouter } from "./routes/All_API";
 import session from'express-session'
 import { sessionConfigs } from "./config/sessionConfigs";
-
+import './socketServer'
 
 
 //@desc load config file
@@ -72,23 +72,6 @@ app.use((req, res, next) => {
 //@desc lunch the server and start listening on port (make sure the port in your hole deplotment stuff is eaqul to to port the massage below printing :-/ ) 
 const httpServer = http.createServer(app);
 httpServer.listen(process.env.PORT, () => logging.info(NAMESPACE, `Server is running on default host :${process.env.PORT}`));
-
-
- import WebSockett from 'ws'
- const socketServer = new WebSockett.Server({port: 3001})
-
- socketServer.on('connection' , socket => {
-   socket.on('message', message =>{
-     let i=0
-     const interval = setInterval(()=>{
-       i++
-      if(i>5) clearInterval(interval)
-      console.log(message.toString())
-      socket.send('hey')
-     },2000)
-   })
- })
-
 
 
 
