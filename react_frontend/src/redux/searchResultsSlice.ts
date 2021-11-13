@@ -1,46 +1,38 @@
 import {createSlice , PayloadAction} from '@reduxjs/toolkit'
-import {IAccommodationInSessionStorage} from '../interfaces/SearchResult'
-import {ISearchEngine} from '../interfaces/searchEngine'
-import {ISearchQuery} from '../interfaces/seqrchQuery'
 
-export interface IStore {
+export interface IExampleStoreState {
     
     /**
-     * the present query
+     * comment about 
      */
-    query : ISearchQuery,
+    name : string,
     /**
-     * all the results being loaded in
+     * comment about age
      */
-    results : IAccommodationInSessionStorage[]
+    age : 
 }
 
-const initialState : IStore = {
-    query : {
-        ski_site: 1,
-        from_date: "03/04/2022",
-        to_date: "03/11/2022",
-        group_size:4
-    },
-    results : [],
+const initialState : IExampleStoreState = {
+    name : 'tomer',
+    age: 29
+
 }
 
-const searchResultsSlice = createSlice({
-    name : "results", // ??
+const ExampleSlice = createSlice({
+    name : "example", // A string name for this slice of state. Generated action type constants will use this as a prefix.(toolkit docs)
     initialState,
     reducers: {
-        setQuery: (state, action : PayloadAction<ISearchQuery>) =>{
-            state.query = action.payload
+        setName: (state:IExampleStoreState, action : PayloadAction<string>) =>{
+            state.name = action.payload
         },
-        setResults : (state, action : PayloadAction<IAccommodationInSessionStorage[]>) =>{
-            state.results = action.payload
+        setAge : (state : IExampleStoreState, action : PayloadAction<number[]>) =>{
+            state.age = action.payload
         },        
-        addResults : (state, action : PayloadAction<IAccommodationInSessionStorage[]>) =>{
-            state.results = action.payload.concat(state.results)
-            // [...state.results, ...action.payload]
+        increaseAge : (state : IExampleStoreState, action : PayloadAction<number[]>) =>{
+            state.age = state.age + action.payload
         },
     }
 })
 
-export const {setQuery, setResults, addResults} = searchResultsSlice.actions
-export {searchResultsSlice}
+export const {setName, setAge, increaseAge} = ExampleSlice.actions
+export {ExampleSlice}
