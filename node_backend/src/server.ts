@@ -9,6 +9,8 @@ import { rootRouter } from "./routes/All_API";
 import session from'express-session'
 import { sessionConfigs } from "./config/sessionConfigs";
 import './socketServer'
+import { socketServer } from './socketServer';
+import { Socket } from 'net';
 
 
 //@desc load config file
@@ -71,9 +73,13 @@ app.use((req, res, next) => {
 
 //@desc lunch the server and start listening on port (make sure the port in your hole deplotment stuff is eaqul to to port the massage below printing :-/ ) 
 const httpServer = http.createServer(app);
+httpServer.on('upgrade', (request, socket, head) => {
+  socketServer.handleUpgrade(request, socket as Socket, head, (sock) => {
+    socketServer.emit('connection', sock, request);
+  });
+});
+// const server = app.listen(3000); // TO DO => learn and document the diffrence between <http.createServer(app)> and <app.listen
 httpServer.listen(process.env.PORT, () => logging.info(NAMESPACE, `Server is running on default host :${process.env.PORT}`));
-
-
 
 
 

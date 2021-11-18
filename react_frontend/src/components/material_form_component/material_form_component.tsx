@@ -21,7 +21,7 @@ const MaterialFormComponent = (props: any) => {
   const handleSkiSiteChange = (value:string) => {if(value)setSkiSite(value)};
   const handleGroupSizeChange = (value:string) => {if(value)setGroupSize(value)};
   
-  const socket = new WebSocket('ws://localhost/websockets/')
+  const socket = new WebSocket('ws://localhost/sockets/') // the address here is determined by the nginx location's path
   socket.onmessage = ({data}) => {
       console.log('message from server' )
       const thisSecond = new Date()

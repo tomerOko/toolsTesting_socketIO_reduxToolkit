@@ -1,13 +1,14 @@
 import WebSockett from 'ws'
-const socketServer = new WebSockett.Server({port: 3001})
 import axios, { AxiosResponse } from "axios";
 import { IResposeBody, IRequestBody, IQuery, ISearchEngine } from './types/interfaces/search_vication_package.types';
 import {searchEngines} from './config/searchEngines'
+
+const socketServer = new WebSockett.Server({ noServer: true })
  
 socketServer.on('connection' , socket => {
    
     socket.on('message', message =>{
-        
+        // console.log(message)
         const requestBody :IRequestBody = JSON.parse(message.toString())
         const query = requestBody.query
         searchEngines.forEach(searchEngine => { // imitates multiple search engines
@@ -41,3 +42,5 @@ socketServer.on('connection' , socket => {
      socket.send('hey')
     },2000)
  }
+
+ export {socketServer}
