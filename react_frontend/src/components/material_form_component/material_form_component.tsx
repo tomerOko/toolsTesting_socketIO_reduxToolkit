@@ -8,6 +8,10 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Button } from '@mui/material';
+import {addAccommodations, clearAccommodations} from '../../redux/deals_from_server_slice'
+import { useAppDispatch } from '../../redux/store';
+import { IBody, IAccommodationAsDeal } from '../../types/interfaces/search_vication_package.types';
+import { v4 } from 'uuid';
 
 const MaterialFormComponent = (props: any) => {
 
@@ -16,6 +20,11 @@ const MaterialFormComponent = (props: any) => {
   const [skiSite, setSkiSite] = React.useState<string>("1")
   const [groupSize, setGroupSize] = React.useState<string>("1")
 
+
+  // import { useAppSelector } from '../../redux/store';
+  // const users = useAppSelector(state => state.DealsFromServerReducer.accommodations)
+  const dispach = useAppDispatch()
+
   const handleFromDateChange = (newValue: Date | null) => {if(newValue)setFromDate(newValue)};
   const handleToDateChange = (newValue: Date | null) => {if(newValue)setToDate(newValue)};
   const handleSkiSiteChange = (value:string) => {if(value)setSkiSite(value)};
@@ -23,14 +32,22 @@ const MaterialFormComponent = (props: any) => {
   
   const socket = new WebSocket('ws://localhost/sockets/') // the address here is determined by the nginx location's path
   socket.onmessage = ({data}) => {
-      console.log('message from server' )
-      const thisSecond = new Date()
-      console.log(thisSecond.toLocaleString()," ",thisSecond.getSeconds())
+    console.log('message from server' )
+    const thisSecond = new Date()
+    console.log(thisSecond.toLocaleString()," ",thisSecond.getSeconds())
+    if((data as IBody).accommodations){
       console.log(data)
+      const newAccomodations = ((data as IBody).accommodations) as IAccommodationAsDeal[]
+      newAccomodations.map((hotelAsDeal => hotelAsDeal.Id=v4()));
+      dispach(addAccommodations(newAccomodations))
+    } // TO DO - Ibody is terrible naming! 
+
+      
+      
   }
 
-  const connectToSocket = () => {
-    
+  const startServerSearch = () => {
+    dispach(clearAccommodations(""))
     const query = {
       query:{
         ski_site: Number(skiSite), 
@@ -39,7 +56,6 @@ const MaterialFormComponent = (props: any) => {
         group_size: Number(groupSize) 
       }
     }
-    
     const queryAsString = JSON.stringify(query)
       socket.send(queryAsString)
   }
@@ -74,7 +90,7 @@ const MaterialFormComponent = (props: any) => {
         <TextField id="groupSize" label="gang size" value={groupSize} variant="outlined" type="number" onChange={(e) => handleGroupSizeChange(e.target.value)} InputLabelProps={{shrink: true, }} />
         </Stack>
       </LocalizationProvider>
-      <Button onClick={e=> connectToSocket()}>search</Button>
+      <Button onClick={e=> startServerSearch()}>search</Button>
     </React.Fragment>
   );
 }

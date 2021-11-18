@@ -1,10 +1,10 @@
 import {configureStore} from '@reduxjs/toolkit'
 import {useSelector, useDispatch, TypedUseSelectorHook} from 'react-redux'
-import {ExampleSlice} from './example_slice'
+import { DealsFromServerSlice } from './deals_from_server_slice'
 const store = configureStore(
     {
         reducer:{
-            ExampleReducer: ExampleSlice.reducer
+            DealsFromServerReducer: DealsFromServerSlice.reducer
         },
         devTools:true
     }

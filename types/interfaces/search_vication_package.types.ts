@@ -67,3 +67,8 @@ export interface ISearchEngine{
 }         
 
 
+//client suitability interfaces
+export interface IAccommodationAsDeal extends IAccommodation {
+    Id:string,
+}
+

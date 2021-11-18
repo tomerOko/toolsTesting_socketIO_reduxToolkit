@@ -2,7 +2,6 @@ import './App.css';
 // import AllTests from './components/tests/AllTests';
 import { CSSProperties } from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
-import SocketTestComponent from './components/socket_test_component/socket_test_component';
 import { MaterialFormComponent } from './components/material_form_component/material_form_component';
 
 function App() {
