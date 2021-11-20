@@ -1,0 +1,234 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$ref": "#/definitions/allTypesRelevantToApi",
+    "definitions": {
+        "allTypesRelevantToApi": {
+            "type": "object",
+            "properties": {
+                "ISuccessfulBodyOfSearchVicationPackages": {
+                    "$ref": "#/definitions/ISuccessfulBodyOfSearchVicationPackages"
+                },
+                "IAccommodations": {
+                    "$ref": "#/definitions/IAccommodations"
+                },
+                "IQueryRequestBody": {
+                    "$ref": "#/definitions/IQueryRequestBody"
+                },
+                "IQuery": {
+                    "$ref": "#/definitions/IQuery"
+                }
+            },
+            "required": [
+                "ISuccessfulBodyOfSearchVicationPackages",
+                "IAccommodations",
+                "IQueryRequestBody",
+                "IQuery"
+            ],
+            "additionalProperties": false
+        },
+        "ISuccessfulBodyOfSearchVicationPackages": {
+            "type": "object",
+            "properties": {
+                "statusCode": {
+                    "type": "number"
+                },
+                "body": {
+                    "type": "object",
+                    "properties": {
+                        "success": {
+                            "type": "string"
+                        },
+                        "accommodations": {
+                            "$ref": "#/definitions/IAccommodations"
+                        }
+                    },
+                    "required": [
+                        "success",
+                        "accommodations"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "statusCode",
+                "body"
+            ],
+            "additionalProperties": false
+        },
+        "IAccommodations": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/IAccommodation"
+            }
+        },
+        "IAccommodation": {
+            "type": "object",
+            "properties": {
+                "HotelCode": {
+                    "type": "string"
+                },
+                "HotelName": {
+                    "type": "string"
+                },
+                "HotelDescriptiveContent": {
+                    "$ref": "#/definitions/IHotelDescriptiveContent"
+                },
+                "HotelInfo": {
+                    "$ref": "#/definitions/IHotelInfo"
+                },
+                "PricesInfo": {
+                    "$ref": "#/definitions/IPricesInfo"
+                }
+            },
+            "required": [
+                "HotelCode",
+                "HotelName",
+                "HotelDescriptiveContent",
+                "HotelInfo",
+                "PricesInfo"
+            ],
+            "additionalProperties": false
+        },
+        "IHotelDescriptiveContent": {
+            "type": "object",
+            "properties": {
+                "Images": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/IImage"
+                    }
+                }
+            },
+            "required": [
+                "Images"
+            ],
+            "additionalProperties": false
+        },
+        "IImage": {
+            "type": "object",
+            "properties": {
+                "MainImage": {
+                    "type": "string"
+                },
+                "URL": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "URL"
+            ],
+            "additionalProperties": false
+        },
+        "IHotelInfo": {
+            "type": "object",
+            "properties": {
+                "Position": {
+                    "$ref": "#/definitions/IPosition"
+                },
+                "Rating": {
+                    "type": "string"
+                },
+                "Beds": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "Position",
+                "Rating",
+                "Beds"
+            ],
+            "additionalProperties": false
+        },
+        "IPosition": {
+            "type": "object",
+            "properties": {
+                "Latitude": {
+                    "type": "string"
+                },
+                "Longitude": {
+                    "type": "string"
+                },
+                "Distances": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/IDistance"
+                    }
+                }
+            },
+            "required": [
+                "Latitude",
+                "Longitude",
+                "Distances"
+            ],
+            "additionalProperties": false
+        },
+        "IDistance": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "distance": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "distance"
+            ],
+            "additionalProperties": false
+        },
+        "IPricesInfo": {
+            "type": "object",
+            "properties": {
+                "AmountAfterTax": {
+                    "type": "string"
+                },
+                "AmountBeforeTax": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "AmountAfterTax",
+                "AmountBeforeTax"
+            ],
+            "additionalProperties": false
+        },
+        "IQueryRequestBody": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "$ref": "#/definitions/IQuery"
+                }
+            },
+            "required": [
+                "query"
+            ],
+            "additionalProperties": false
+        },
+        "IQuery": {
+            "type": "object",
+            "properties": {
+                "ski_site": {
+                    "type": "number"
+                },
+                "from_date": {
+                    "type": "string"
+                },
+                "to_date": {
+                    "type": "string"
+                },
+                "group_size": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "ski_site",
+                "from_date",
+                "to_date",
+                "group_size"
+            ],
+            "additionalProperties": false
+        }
+    }
+}

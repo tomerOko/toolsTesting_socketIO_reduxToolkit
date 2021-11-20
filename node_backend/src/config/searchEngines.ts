@@ -1,4 +1,4 @@
-import { ISearchEngine } from "../types/interfaces/search_vication_package.types";
+import { ISearchEngine } from "../types/interfaces/search_vication_packages.types";
 
 const searchEngines : ISearchEngine [] = [
     {

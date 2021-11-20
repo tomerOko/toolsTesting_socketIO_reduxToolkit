@@ -16,19 +16,24 @@ import { Socket } from 'net';
 //@desc load config file
 //was imported from diffrent module in order to reun before this module
 
+
 //@desc connect to mongo
+//this function have to be called after dotenv.config beacouse it is depeneds on propeties from process.env
 connectNow ()
-//@desc  mongoose connection this function have to be called after dotenv.config beacouse it is depeneds on propeties from process.env
+
 
 //well.. :)
 const app = express()
 
+
 //@desc  express-rate-limit
 app.use(rateLimiter);
+
 
 //@desc session storage with express-sessions and mongo-sessions-connect
 app.use(session(sessionConfigs));
  
+
 //@desc cros env to make the browser not block requerst from diffrent port (domain = protocol+host+port. cors = diffrent domains)
 //if serving the client as a static folder from the server, or if using nginx (or any other reverse proxy) thi part can be removed as well
 const corsConfig = {
@@ -37,15 +42,18 @@ const corsConfig = {
 };
 app.use(cors(corsConfig));
 
+
 // //@desc Static Folder 
 // //'_dirname' means 'if the run command lunced from any directory other then the one containing this file, the use the absolute path of this file'
 // app.use(express.static(path.join(__dirname, 'dist')))
 
+
 //@desc json parser
 app.use(express.json())
+
+
 //@desc URLs matadata parser
 app.use(express.urlencoded({extended : false}))
-
 
 
 // @desc logging middleware (not for errors)
@@ -57,6 +65,7 @@ app.use((req:Request, res:Response, next:NextFunction) => {
     })
     next();
 });
+
 
 // @desc routers tree 
 app.use('/' , rootRouter) 
@@ -78,6 +87,8 @@ httpServer.on('upgrade', (request, socket, head) => {
     socketServer.emit('connection', sock, request);
   });
 });
+
+
 // const server = app.listen(3000); // TO DO => learn and document the diffrence between <http.createServer(app)> and <app.listen
 httpServer.listen(process.env.PORT, () => logging.info(NAMESPACE, `Server is running on default host :${process.env.PORT}`));
 

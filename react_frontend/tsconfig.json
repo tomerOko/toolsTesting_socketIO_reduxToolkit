@@ -22,5 +22,6 @@
   },
   "include": [
     "src"
-  ]
+  ],
+  "": ["src/types/schemas/search_vication_packages.validatorsForServer.ts"]
 }

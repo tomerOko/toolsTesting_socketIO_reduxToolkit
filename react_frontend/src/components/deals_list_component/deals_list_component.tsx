@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { Fragment } from "react";
 import { useAppSelector } from '../../redux/store';
-import {IAccommodationAsDeal} from '../../types/interfaces/search_vication_package.types'
+import {IAccommodationAsDeal} from '../../types/interfaces/search_vication_packages.types'
 import './'
 
 

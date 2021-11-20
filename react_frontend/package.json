@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^12.1.10",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "ajv": "^6.12.6",
     "axios": "^0.21.1",
     "date-fns": "latest",
     "node-sass": "^6.0.1",

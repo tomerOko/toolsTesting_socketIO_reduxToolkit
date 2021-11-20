@@ -1,5 +1,5 @@
 import {createSlice , PayloadAction} from '@reduxjs/toolkit'
-import {IAccommodationAsDeal, IBody} from '../types/interfaces/search_vication_package.types'
+import {IAccommodationAsDeal} from '../types/interfaces/search_vication_packages.types'
 
 export interface IDealsFromServerState {
     

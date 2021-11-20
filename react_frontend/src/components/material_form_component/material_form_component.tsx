@@ -5,13 +5,13 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Button } from '@mui/material';
 import {addAccommodations, clearAccommodations} from '../../redux/deals_from_server_slice'
 import { useAppDispatch } from '../../redux/store';
-import { IBody, IAccommodationAsDeal } from '../../types/interfaces/search_vication_package.types';
+import { IAccommodationAsDeal } from '../../types/interfaces/search_vication_packages.types';
 import { v4 } from 'uuid';
+import { validateIAccommodations } from '../../search_vication_packages.validators';
 
 const MaterialFormComponent = (props: any) => {
 
@@ -32,18 +32,21 @@ const MaterialFormComponent = (props: any) => {
   
   const socket = new WebSocket('ws://localhost/sockets/') // the address here is determined by the nginx location's path
   socket.onmessage = ({data}) => {
-    console.log('message from server' )
-    const thisSecond = new Date()
-    console.log(thisSecond.toLocaleString()," ",thisSecond.getSeconds())
-    if((data as IBody).accommodations){
-      console.log(data)
-      const newAccomodations = ((data as IBody).accommodations) as IAccommodationAsDeal[]
+    timeLogger()
+    const parsedData = JSON.parse(data)
+    if(validateIAccommodations(parsedData)){
+      const newAccomodations : IAccommodationAsDeal[] = parsedData as IAccommodationAsDeal[]
       newAccomodations.map((hotelAsDeal => hotelAsDeal.Id=v4()));
       dispach(addAccommodations(newAccomodations))
-    } // TO DO - Ibody is terrible naming! 
+    }
+    else{
+      console.log(validateIAccommodations.errors)
+    } 
+  }
 
-      
-      
+  const timeLogger = () => {
+    const thisSecond = new Date()
+    console.log('message from server '+thisSecond.toLocaleString()," ",thisSecond.getSeconds())
   }
 
   const startServerSearch = () => {
