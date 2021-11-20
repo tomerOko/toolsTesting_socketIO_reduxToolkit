@@ -21,9 +21,7 @@ const DealsFromServerSlice = createSlice({
             state.accommodations = action.payload
         },
         addAccommodations : (state : IDealsFromServerState, action : PayloadAction<IAccommodationAsDeal[]>) =>{
-            let newPayload = Object.assign({}, action.payload);
-            newPayload = Object.assign(newPayload, state.accommodations);
-            state.accommodations = newPayload
+            state.accommodations = [...action.payload, ...state.accommodations]
         },        
         clearAccommodations : (state : IDealsFromServerState, action : PayloadAction<string>) =>{
             console.log(action.payload)

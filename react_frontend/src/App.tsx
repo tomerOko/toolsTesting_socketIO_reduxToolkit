@@ -3,15 +3,18 @@ import './App.css';
 import { CSSProperties } from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import { MaterialFormComponent } from './components/material_form_component/material_form_component';
+import DealsListComponent from './components/deals_list_component/deals_list_component';
+import "slick-carousel/slick/slick.css";  // part of the slick carousle https://react-slick.neostack.com/docs/get-started
+import "slick-carousel/slick/slick-theme.css";// part of the slick carousle https://react-slick.neostack.com/docs/get-started
 
 function App() {
   return (
     <Router>
-      <div className = "blueishBackground" style={outerContainerStyle}>
-        <div className="container blueishBackground" style={innerContainerStyle}>
-          {/* <SocketTestComponent/> */}
-          <MaterialFormComponent/>
-        </div>
+      <div className = "blueishBackground container" style={outerContainerStyle}>
+          <Routes>
+            <Route path="/search_result" element={<DealsListComponent/>} />
+            <Route path="" element={<MaterialFormComponent />} />
+          </Routes>
       </div>
     </Router>
  

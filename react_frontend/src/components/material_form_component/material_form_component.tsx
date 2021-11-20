@@ -12,6 +12,8 @@ import { useAppDispatch } from '../../redux/store';
 import { IAccommodationAsDeal } from '../../types/interfaces/search_vication_packages.types';
 import { v4 } from 'uuid';
 import { validateIAccommodations } from '../../search_vication_packages.validators';
+import { Link } from 'react-router-dom';
+import "./material_form_component.css"
 
 const MaterialFormComponent = (props: any) => {
 
@@ -65,37 +67,43 @@ const MaterialFormComponent = (props: any) => {
 
   return (
     <React.Fragment>
+      <div className="formContainer">
+        <div className="centeredForm">
 
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <Stack spacing={3}>
-    
-        <Select  id="skisite" label="ski site" variant="outlined"  value={skiSite} onChange={(e)=>{handleSkiSiteChange(e.target.value)}}>
-          <MenuItem value={1}>Whistler Blackcomb</MenuItem>
-          <MenuItem value={2}>Courchevel</MenuItem>
-          <MenuItem value={3}>Zermatt</MenuItem>
-        </Select>
-
-          <DesktopDatePicker
-            label="Flight Date"
-            inputFormat="MM/dd/yyyy"
-            value={fromDate}
-            onChange={handleFromDateChange}
-            renderInput={(params) => <TextField {...params} />}
-          />
-          <DesktopDatePicker
-            label="Return Date"
-            inputFormat="MM/dd/yyyy"
-            value={toDate}
-            onChange={handleToDateChange}
-            renderInput={(params) => <TextField {...params} />}
-          />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <Stack spacing={3}>
         
-        <TextField id="groupSize" label="gang size" value={groupSize} variant="outlined" type="number" onChange={(e) => handleGroupSizeChange(e.target.value)} InputLabelProps={{shrink: true, }} />
-        </Stack>
-      </LocalizationProvider>
-      <Button onClick={e=> startServerSearch()}>search</Button>
+            <Select  id="skisite" label="ski site" variant="outlined"  value={skiSite} onChange={(e)=>{handleSkiSiteChange(e.target.value)}}>
+              <MenuItem value={1}>Whistler Blackcomb</MenuItem>
+              <MenuItem value={2}>Courchevel</MenuItem>
+              <MenuItem value={3}>Zermatt</MenuItem>
+            </Select>
+
+              <DesktopDatePicker
+                label="Flight Date"
+                inputFormat="MM/dd/yyyy"
+                value={fromDate}
+                onChange={handleFromDateChange}
+                renderInput={(params) => <TextField {...params} />}
+              />
+              <DesktopDatePicker
+                label="Return Date"
+                inputFormat="MM/dd/yyyy"
+                value={toDate}
+                onChange={handleToDateChange}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            
+            <TextField id="groupSize" label="gang size" value={groupSize} variant="outlined" type="number" onChange={(e) => handleGroupSizeChange(e.target.value)} InputLabelProps={{shrink: true, }} />
+            </Stack>
+          </LocalizationProvider>
+          <Button className="formsButton" component={Link} to="/search_result" onClick={()=> startServerSearch()}>search</Button>
+        </div>
+      </div>
     </React.Fragment>
   );
 }
 
 export {MaterialFormComponent}
+
+
