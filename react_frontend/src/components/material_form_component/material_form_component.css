@@ -1,18 +1,143 @@
 .formContainer{
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    display: grid;
-    align-items: center;
-    justify-content: center;
-}
-
-.centeredForm{
-    height: 500px;
-    width: 300px;
     position: relative;
+    top: 0px;
+    left: 0px;
+    width: 1024px;
+    height: 49px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: -2px 0px 6px #00000050;
+    opacity: 1;
+}
+
+.formContainer>*{
+    position: absolute;
+}
+
+
+#logoImage{
+
+    top: 15px;
+    left: 119px;
+    width: 52px;
+    height: 20px;
+    background-image:  url('./sxan8dypicdppn0md5gx.png');
+    background-repeat: no-repeat;
+    background-size: 55px;
+    background-position: 40% 27%;
+}
+
+#wiskiLogoText{
+    top: 16px;
+    left: 18px;
+    width: 96px;
+    height: 19px;
+    background-image:  url('./sxan8dypicdppn0md5gx.png');
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: 40% 69%;
+}
+
+.input1{
+    top: 12px;
+    left: 271px;
+    width: 162px;
+    height: 27px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 0.5px solid #D1D0D0;
+    border-radius: 5px;
+    opacity: 1;
+}
+
+.input2{
+    top: 12px;
+    left: 444px;
+    width: 119px;
+    height: 27px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 0.5px solid #D1D0D0;
+    border-radius: 5px;
+    opacity: 1;
+}
+
+.input3{
+    top: 12px;
+    left: 574px;
+    width: 296px;
+    height: 27px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 0.5px solid #D1D0D0;
+    border-radius: 5px;
+    opacity: 1;
     display: grid;
+    grid-template-columns: 1fr 10px 1fr;
+    justify-content: center;
     align-items: center;
+    justify-items: center;
+
+}
+
+.input4{
+    top: 12px;
+    left: 963px;
+    width: 51px;
+    height: 27px;
+    background: transparent linear-gradient(270deg, #0D65F9 0%, #1A27F8 100%) 0% 0% no-repeat padding-box;
+    border-radius: 5px;
+    opacity: 1;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.input5{
+    top: 12px;
+    left: 963px;
+    width: 51px;
+    height: 27px;
+    background: transparent linear-gradient(270deg, #0D65F9 0%, #1A27F8 100%) 0% 0% no-repeat padding-box;
+    border-radius: 5px;
+    opacity: 1;
+    display: grid;
     justify-content: center;
 }
 
+
+/* input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+} */
+
+.justTextInput {
+    border:0;
+    display: inline;
+    display: inline-grid;
+    grid-template-columns: 100px 10px;
+    justify-items: right;
+}
+
+input[type="date"]:focus {
+    border:0;
+    display: inline;
+    display: inline-grid;
+    grid-template-columns: 100px 10px;
+    justify-items: right;
+}
+
+input[type="date"]:hover {
+    border:0;
+    display: inline;
+    display: inline-grid;
+    grid-template-columns: 100px 10px;
+    justify-items: right;
+}
+
+.justTextInput:hover{
+    border:0;
+    display: inline;
+}
+
+.justTextInput:focus{
+    border:0;
+    display: inline;
+}

@@ -10,39 +10,17 @@ import "slick-carousel/slick/slick-theme.css";// part of the slick carousle http
 function App() {
   return (
     <Router>
-      <div className = "blueishBackground container" style={outerContainerStyle}>
-          <Routes>
-            <Route path="/search_result" element={<DealsListComponent/>} />
-            <Route path="" element={<MaterialFormComponent />} />
-          </Routes>
+      <div className = "appContainer">
+        <div className="middle">
+            <Routes>
+              <Route path="" element={<DealsListComponent />} />
+            </Routes>
+        </div>
       </div>
     </Router>
  
   );
 }
-
-const fullScreen:CSSProperties = { //basic 'full screen container' style
-  width:'100vw',
-  maxWidth:'100%',
-  height:'100vh',
-  maxHeight:'100%',
-}
-
-const innerContainerStyle:CSSProperties = Object.assign(
-  {
-    display:'grid',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }, 
-  fullScreen
-)
-
-const outerContainerStyle:CSSProperties = Object.assign(
-  {
-    display:'absolute'
-  }, 
-  fullScreen
-)
 
 export default App;
 
